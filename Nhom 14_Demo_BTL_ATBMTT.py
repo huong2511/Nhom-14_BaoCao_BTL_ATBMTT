@@ -462,6 +462,13 @@ def Decrypt(self):
 #huyển đổi giá trị d2 và n2 từ chuỗi sang số nguyên.
     d2 = int(self.txtE1.text())
     n2 = int(self.txtN1_2.text())
+#mở một tệp văn bản có tên “New Text Document.txt” và đọc nội dung của tệp. Nó cũng mở một tệp khác có tên “HAHA.txt” và đọc nội dung của tệp đó.
+    s = io.open("New Text Document.txt", 'r',encoding = "utf-8")
+    data = s.read()
+    vb = io.open("HAHA.txt", 'r', encoding="utf-8")
+    data1 = vb.read()
+#giải mã nội dung của tệp “New Text Document.txt”.
+    bam = GiaiMa(data, d2, n2)
 #so sánh 
     if(vanban == data1):
         self.ShowMessageBox("Thông báo", "Chũ ký hợp lệ!")
@@ -480,6 +487,7 @@ def HashFile(self):
         self.ShowMessageBox("lỗi", check)
 # Hiển thị thông báo lỗi nếu vbck rỗng
     else:
+        f = io.open("HAHA.txt", 'w', encoding="utf-8")# Mở tệp HAHA.txt để ghi
         f.write(self.txtVNCK.text())  # Ghi giá trị từ trường txtVNCK vào tệp
         hash_object = hashlib.md5(vbck.encode()) # Tạo một đối tượng băm MD5 từ vbck
         self.txtHamBam.setText(hash_object.hexdigest()) # Đặt giá trị của trường txtHamBam thành giá trị băm hex của vbck
